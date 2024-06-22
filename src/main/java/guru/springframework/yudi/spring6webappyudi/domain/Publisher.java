@@ -1,11 +1,10 @@
 package guru.springframework.yudi.spring6webappyudi.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Publisher {
@@ -18,6 +17,9 @@ public class Publisher {
     private String city;
     private String state;
     private String zip;
+
+    @OneToMany(mappedBy = "publisher")
+    private final Set<Book> books = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -65,6 +67,10 @@ public class Publisher {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
     }
 
     @Override
