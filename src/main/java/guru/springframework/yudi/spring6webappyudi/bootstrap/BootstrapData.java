@@ -2,8 +2,10 @@ package guru.springframework.yudi.spring6webappyudi.bootstrap;
 
 import guru.springframework.yudi.spring6webappyudi.domain.Author;
 import guru.springframework.yudi.spring6webappyudi.domain.Book;
+import guru.springframework.yudi.spring6webappyudi.domain.Publisher;
 import guru.springframework.yudi.spring6webappyudi.domain.repositories.AuthorRepository;
 import guru.springframework.yudi.spring6webappyudi.domain.repositories.BookRepository;
+import guru.springframework.yudi.spring6webappyudi.domain.repositories.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +13,12 @@ import org.springframework.stereotype.Component;
 public class BootstrapData implements CommandLineRunner {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
+    private final PublisherRepository publisherRepository;
 
-    public BootstrapData(BookRepository bookRepository, AuthorRepository authorRepository) {
+    public BootstrapData(BookRepository bookRepository, AuthorRepository authorRepository, PublisherRepository publisherRepository) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
+        this.publisherRepository = publisherRepository;
     }
 
     @Override
@@ -49,5 +53,14 @@ public class BootstrapData implements CommandLineRunner {
         System.out.println("In Bootstrap");
         System.out.println("Author count : "+authorRepository.count());
         System.out.println("Book count : "+bookRepository.count());
+
+        Publisher publisher = new Publisher();
+        publisher.setPublisherName("Pearson");
+        publisher.setAddress("Address 1");
+        publisher.setCity("City 1");
+        publisher.setState("State 1");
+        publisher.setZip("1098735625");
+        Publisher pearsonSaved = publisherRepository.save(publisher);
+        System.out.println("Publisher count : "+publisherRepository.count());
     }
 }
