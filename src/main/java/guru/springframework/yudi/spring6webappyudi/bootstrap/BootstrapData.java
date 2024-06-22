@@ -60,8 +60,8 @@ public class BootstrapData implements CommandLineRunner {
         publisher.setCity("City 1");
         publisher.setState("State 1");
         publisher.setZip("1098735625");
+
         Publisher pearsonSaved = publisherRepository.save(publisher);
-        pearsonSaved = publisherRepository.save(pearsonSaved);
         System.out.println("Publisher count : "+publisherRepository.count());
 
         noEJBSaved.setPublisher(pearsonSaved);
